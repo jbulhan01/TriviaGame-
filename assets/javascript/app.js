@@ -12,7 +12,7 @@ $(document).ready(function () {
 
     });
 
-    let answerBank = [
+    var answerBank = [
         'Wilt Chamberlin', 'Bill Russell', 'Steve Nash', 'LeBron James'
 
     ]
@@ -40,34 +40,56 @@ $(document).ready(function () {
                 correct: 'Steve Nash'
             },
             {
-                question: 'WWho was the #1 draft pick in 2003?',
+                question: 'Who was the #1 draft pick in 2003?',
                 answers: ['LeBron James', 'Dwayne Wade', 'Charles Barkley', 'Allen Iverson'],
                 correct: 'LeBron James'
             },
+            {
+                question: 'What team has the most NBA Finals appearances?',
+                answers: ['Los Angeles Lakers', 'Boston Celtics', 'Minnesota Timberwolves', 'Chicago Bulls'],
+                correct: 'Los Angeles Lakers'
+            },
+            {
+                question: 'Who won the most NBA Finals MVPs?',
+                answers: ['Michael Jordan', 'LeBron James', 'Tim Duncan', 'Kevin Garnett'],
+                correct: 'Michael Jordan'
+            },
+            {
+                question: 'Who was the tallest player of all-time?',
+                answers: ['Shaq', 'Kareem Abdul-Jabbar', 'Gheorghe Muresan', 'Yao Ming'],
+                correct: 'Gheorghe Muresan'
+            },
+            {
+                question: 'What team drafted Kobe Bryant?',
+                answers: ['Charlotte Hornets', 'Los Angeles Lakers', 'New York Knicks', 'Boston Celtics'],
+                correct: 'Charlotte Hornets'
+            },
+
         ];
         //start outer loop to extract questions
         for (var i = 0; i < trivia.length; i++) {
 
             $('.questions').append('<div style="margin-top:15px;">' + trivia[i].question + '</div>')
 
-            
-            for (var j =0; j < trivia[i].answers.length; j++) {
 
-                $('.questions').append(`<input type="radio" name="question-${i}" value="${trivia[i].answers[j]}">${trivia[i].answers[j]}`)
-        
+            for (var j = 0; j < trivia[i].answers.length; j++) {
+
+                $('.questions').append(`<input type="radio" name="questions-${i}" value="${trivia[i].answers[j]}">${trivia[i].answers[j]}`)
+
             }
             //End inner loop to extract answers 
-           
+
 
 
         }//End outer loop to extract questions 
 
         //Counter
         $('.counter').text('100')
+        var counter = $('.counter');
 
-        var game = setInterval(function () {
+
+        var trivia = setInterval(function () {
             if (parseInt(counter.text()) == 0) {
-                //Is 90th minute
                 $('#game').hide();
                 $('#end').show();
                 $('.counter'.append('0'))
@@ -76,14 +98,15 @@ $(document).ready(function () {
             counter.text(parseInt(counter.text()) - 1);
         }, 550);
 
+        //Need score to show up after submitting the answers 
         function score() {
 
             //Questions
-            if ($('input[type="radio"][name=${trivia[i].answers[0]}]:checked').val() == "${trivia[i].answers[0]}") {
+            if ($('input[type="radio"][name=questions-${i}:checked').val() == "{trivia[i].answers[j]") {
                 guessedRight++;
-            } else if ($('input[type="radio"][name=${trivia[i].answers[0]}]:checked').val() == "${trivia[i].answers[1]}" ||
-                $('input[type="radio"][name=${trivia[i].answers[0]}]:checked').val() == "${trivia[i].answers[2]}" ||
-                $('input[type="radio"][name=${trivia[i].answers[0]}]:checked').val() == "${trivia[i].answers[3]}") {
+            } else if ($('input[type="radio"][name=questions-${i}]:checked').val() == "${trivia[i].answers[j]" ||
+                $('input[type="radio"][name=questions-${i}]:checked').val() == "${trivia[i].answers[j]" ||
+                $('input[type="radio"][name=questions-${i}]:checked').val() == "${trivia[i].answers[j]") {
                 guessedWrong++;
             } else {
                 unanswered++;
@@ -91,17 +114,14 @@ $(document).ready(function () {
 
         };
 
-
-
         //Submit button
-        $('.questions').append('<div style="margin-top:30px"> <button class="button2"> Submit </button> </div>')
+        $('.questions').append('<div style="margin-top:15px"> <button class="button2"> Submit </button> </div>')
 
         $('.button2').click(function () {
             console.log()
             $('#game').hide();
             $('.questions').hide();
             $('#end').show();
-
 
             score();
             $(".right").append(guessedRight);
