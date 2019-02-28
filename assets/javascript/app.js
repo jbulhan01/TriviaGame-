@@ -13,11 +13,11 @@ $(document).ready(function () {
     });
 
     var answerBank = [
-        'Wilt Chamberlin', 'Bill Russell', 'Steve Nash', 'LeBron James'
+        'Wilt Chamberlin', 'Bill Russell', 'Steve Nash', 'LeBron James', 'Los Angeles Lakers', 'Michael Jordan', 'Gheorghe Muresan', 'Charlotte Hornets'
 
     ]
 
-
+    //Game board, start of game 
     function game() {
         var guessedRight = 0;
         var guessedWrong = 0;
@@ -92,7 +92,7 @@ $(document).ready(function () {
             if (parseInt(counter.text()) == 0) {
                 $('#game').hide();
                 $('#end').show();
-                $('.counter'.append('0'))
+                $('.counter').append('0');
             }
             //Increment counter 
             counter.text(parseInt(counter.text()) - 1);
@@ -101,12 +101,14 @@ $(document).ready(function () {
         //Need score to show up after submitting the answers 
         function score() {
 
-            //Questions
-            if ($('input[type="radio"][name=questions-${i}:checked').val() == "{trivia[i].answers[j]") {
+
+            //Question
+            if ($('input[type="radio"][name=question 0]:checked').val() === "answer 0") {
                 guessedRight++;
-            } else if ($('input[type="radio"][name=questions-${i}]:checked').val() == "${trivia[i].answers[j]" ||
-                $('input[type="radio"][name=questions-${i}]:checked').val() == "${trivia[i].answers[j]" ||
-                $('input[type="radio"][name=questions-${i}]:checked').val() == "${trivia[i].answers[j]") {
+                console.log
+            } else if ($('input[type="radio"][name=question 0]:checked').val() == "answer 1" ||
+                $('input[type="radio"][name=question 0]:checked').val() == "answer 2" ||
+                $('input[type="radio"][name=question 0]:checked').val() == "answer 3") {
                 guessedWrong++;
             } else {
                 unanswered++;
@@ -118,7 +120,11 @@ $(document).ready(function () {
         $('.questions').append('<div style="margin-top:15px"> <button class="button2"> Submit </button> </div>')
 
         $('.button2').click(function () {
+
+
+            
             console.log()
+
             $('#game').hide();
             $('.questions').hide();
             $('#end').show();
@@ -131,7 +137,7 @@ $(document).ready(function () {
         });
 
 
-
+        //Need to get game to restart without refreshing the page 
 
     };//End game function
 
